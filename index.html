@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>練習</title>
+    <meta name="description" content="HP作成の練習用サイトです">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css"> <!--リセット用CSS()-->
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
+
+<body>
+    <header id="header" class="wrapper"> <!--wrapperは共通クラス名 → CSSで横幅などの指定-->
+      <h1 class="site-title"><a href="index.html"><img src="logo.svg" alt="Profile"></a></h1> <!--h1タグ：ロゴ全体をh1タグで囲む、aタグ：ロゴ画像をaタグで囲むことでロゴにリンクを設定。-->
+      <nav>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#sake">Sake</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <!--メインビジュアル-->
+      <div id="mainvisual">
+        <img src="mainvisual.jpg" alt="テキストテキストテキスト">
+      </div>
+      
+      <!--Aboutセクション-->
+      <section id="about" class="wrapper"> <!--wrapperは共通クラス名 → CSSで横幅などの指定-->
+        <h2 class="section-title">About</h2>
+        <div class="content"> <!--プロフィール用の画像とテキストをdivタグで囲む、flexboxで横並びに配置-->
+          <img src="about.jpg" alt="テキストテキストテキストテキスト">
+          <div class="text">
+            <h3 class="cntent-title">KYOSUKE HIDESHIMA</h3> <!--プロフィールタイトル(名前部分)をh3タグで囲む-->
+            <p>
+              これは練習用のHP作成サイト<br>
+              https://code-step.com/demo/html/profile/のサイトの模写による練習
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!--Sakeセクション-->
+      <section id="sake" class="wrapper">　<!--wrapperは共通クラス名 → CSSで横幅などの指定-->
+        <h2 class="content-title">Sake</h2> <!--セクションタイトルをh2タグで記述-->
+        <ul>
+          <li>
+            <img src="sake.jpg" alt="テキストテキストテキスト">
+            <h3>～日本酒について～</h3>
+            <p>日本酒の製造についてご紹介しております</p>
+          </li>
+
+          <li>
+            <img src="sake2.jpg" alt="テキストテキストテキスト">
+            <h3>～日本酒のお申込み～</h3>
+            <p>日本酒はこちらよりお申込みください</p>
+          </li>
+
+          <li>
+            <img src="sake3.jpg" alt="テキストテキストテキスト">
+            <h3>～おすすめの飲み方～</h3>
+            <p>冷酒、熱燗などおすすめの飲み方を紹介します</p>
+          </li>
+        </ul>  
+      </section>
+    </main>
+
+    <!--フッター-->
+    <footer id="footer">
+      <p>&copy;2020 Profile</p>
+    </footer>
+</body>
+</html>
