@@ -2,5 +2,5 @@
 
 宿主　nao sato    
 ## 公式サイト
-詳細は[ここ](https://lucius-annaeus-seneca.github.io/seneca/index2.html)をクリックすべし！！！
+詳細は[ここ](https://lucius-annaeus-seneca.github.io/seneca/index.html)をクリックすべし！！！
 
