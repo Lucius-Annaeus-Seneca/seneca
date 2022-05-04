@@ -1,2 +1,2 @@
-# seneca
-izuoshima
+# 私はなおです
+こんにちは
