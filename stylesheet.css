@@ -1,0 +1,414 @@
+@charset "UTF-8";
+
+html {
+  font-size: 100%;
+}
+body {
+  color: #121212;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+a {
+  color: #121212;
+  text-decoration: none;
+}
+img {
+  max-width: 100%;
+}
+li {
+  list-style: none;
+}
+.site-title {
+  line-height: 1px;
+}
+.site-title a {
+  display: block;
+}
+.sec-title {
+  font-size: 2.25rem;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.wrapper{
+    max-width: 960px;
+    padding: 0 4%;
+    text-align: center;
+    margin: 0 auto 100px auto;
+}
+/*
+フェード表示させる要素に使用するためのクラス
+*/
+.fadein {
+  opacity : 0;
+  transform: translateY(20px);
+  transition: all 1s;
+}
+
+/*-------------------------------------------
+ヘッダー
+-------------------------------------------*/
+/*
+「position: fixed;」でヘッダーを固定し、「z-index: 10;」で前面に表示
+※他のコンテンツでpositionをrelative、absolute、fixedのいずれかに
+設定している場合は、z-indexの数値が大きい方が前面に表示される
+*/
+#header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+  position: fixed;
+  z-index: 10;
+  background-color: #fff;
+}
+/*
+メニューの設定
+*/
+#navi {
+  display: block;/*要素が縦に並ぶイメージ*/
+  position: fixed;/*要素の位置を固定する*/
+  top: 0;/*基準の位置を画面の一番上に指定する*/
+  left: -300px;
+  bottom: 0;/*基準位置を画面の一番下に指定する*/
+  width: 300px;/*幅を指定をする*/
+  color: #fff;/*色の指定*/
+  padding: 60px 25px;/*要素の内側の余白を指定(2つ指定の場合は「上下」「左右」の指定。4つ指定の場合は「上」「右」「下」「左」の指定になる)*/
+  background-color: #121212;/*背景色の指定*/
+  overflow-x: hidden;/*はみ出た要素の "左右" の表示方法を指定。値の「hidden」は、はみ出た部分は非表示にする。*/
+  overflow-y: auto;/*はみ出た要素の "上下" の表示方法を指定。値の「auto」は、ユーザエージェントに依存。*/
+  -webkit-overflow-scrolling: touch;/*不要かも？紹介記事→「https://gorilla.dododori.com/998/」*/
+  transition: all .5s;
+  z-index: 20;/*要素の重なり順を指定(大きい方が上面に表示される)*/
+  opacity: 0;/*要素の不透明度を表す*/
+}
+#navi a {
+  color: #fff;/*色の指定*/
+}
+/*メニューが開いているときは「Left: 0」「opacity: 1」で画面左に表示する*/
+.open #navi {
+  left: 0;/*基準の位置を画面の一番左に指定する*/
+  opacity: 1;/*要素の不透明度を表す*/
+}
+#navi ul {
+  margin: 0;/*要素の外側の余白を指定(paddingとの違いについ手の参考「https://saruwakakun.com/html-css/basic/margin-padding」)*/
+  padding: 0;/*要素の内側の余白を指定*/
+}
+#navi ul.nav-menu {
+  margin-bottom: 60px;/*要素の下の余白*/
+  border-top: solid 1px #fff;/*上のボーダーラインの指定*/
+}
+#navi ul.nav-menu li {
+  position: relative;/*参考「https://naifix.com/relative-absolute/#position」*/
+  margin: 0;
+  padding: 20px 0;
+  border-bottom: solid 1px #fff;/*下のボーダーラインの指定*/
+}
+#navi ul.nav-sns li {
+  padding: 5px 0;
+}
+.toggle_btn {
+  display: block;/*要素が縦に並ぶイメージ*/
+  position: fixed;/*要素の位置を固定する*/
+  top: 25px;/*上からの配置位置を指定*/
+  right: 45px;/*右からの配置位置を指定*/
+  width: 30px;/*幅を指定*/
+  height: 30px;/*高さを指定*/
+  transition: all .5s;
+  cursor: pointer;/*カーソルを合わせた際にマウスポインタから指に変化させる*/
+  z-index: 20;/*要素の重なり順を指定(大きい方が上面に表示される)*/
+}
+
+/*メニュー線の設定(メニューが閉じているとき)*/
+.toggle_btn span {
+  display: block;/*要素が縦に並ぶイメージ*/
+  position: absolute;/*参考「https://naifix.com/relative-absolute/#position」*/
+  left: 0;/*基準の位置を画面の一番左に指定する*/
+  width: 30px;/*幅の指定*/
+  height: 2px;/*高さの指定*/
+  background-color: #333;/*背景色の指定*/
+  border-radius: 4px;/*線や画像に丸みをつける*/
+  transition: all .5s;
+}
+
+/*疑似クラス(nth-child())については「https://techacademy.jp/magazine/8651」を参照*/
+
+/*1本目のメニュー線の位置の設定*/
+.toggle_btn span:nth-child(1) {
+  top: 4px;/*上からの配置位置を指定*/
+}
+/*2本目のメニュー線の位置の設定*/
+.toggle_btn span:nth-child(2) {
+  top: 14px;/*上からの配置位置を指定*/
+}
+/*3本目のメニュー線の位置の設定*/
+.toggle_btn span:nth-child(3) {
+  bottom: 4px;/*下からの配置位置を指定*/
+}
+.open .toggle_btn span {
+  background-color: #fff;/*背景色の指定*/
+}
+.open .toggle_btn span:nth-child(1) {
+  -webkit-transform: translateY(10px) rotate(-315deg);/*webkitはChromeとSafari(とOpera??)に対応するためのもの*/
+  transform: translateY(10px) rotate(-315deg);/*translate:平行移動(XならX軸、YならY軸方向)、rotate:回転(今回は315°)*/
+}
+.open .toggle_btn span:nth-child(2) {
+  opacity: 0;
+}
+.open .toggle_btn span:nth-child(3) {
+  -webkit-transform: translateY(-10px) rotate(315deg);/*webkitはChromeとSafari(とOpera??)に対応するためのもの*/
+  transform: translateY(-10px) rotate(315deg);/*translate:平行移動(XならX軸、YならY軸方向)、rotate:回転(今回は315°)*/
+}
+#mask {
+  display: none;/*画面上は非表示にする*/
+  transition: all .5s;
+}
+
+/*メニューを開いているときの#mask*/
+.open #mask {
+  display: block;/*要素が縦に並ぶイメージ*/
+  position: fixed;/*要素の位置を固定する*/
+  top: 0;/*基準の位置を画面の一番上に指定する*/
+  left: 0;/*基準の位置を画面の一番左に指定する*/
+  width: 100%;/*横幅をブラウザの画面幅100％まで広げる*/
+  height: 100%;/*高さをブラウザの画面幅100％まで広げる*/
+  background: #000;/*背景色の指定*/
+  opacity: .8;/*要素の不透明度を表す*/
+  z-index: 10;/*要素の重なり順を指定(大きい方が上面に表示される)*/
+  cursor: pointer;/*カーソルを合わせた際にマウスポインタから指に変化させる*/
+}
+
+/*-------------------------------------------
+Main
+-------------------------------------------*/
+#main {
+  padding-top: 80px;
+}
+
+/*-------------------------------------------
+Video
+-------------------------------------------*/
+#bg-video {
+  width: 100%;
+}
+
+/*-------------------------------------------
+About
+-------------------------------------------*/
+#About {
+  width: 100%;
+  padding: 100px 0 50px 0;
+  font-size: medium;
+}
+
+#About p{
+    text-align: justify;
+}
+
+/*-------------------------------------------
+Works
+-------------------------------------------*/
+#Works {
+  max-width: 960px;
+  padding: 25px 16px 25px 16px;
+  margin: -50px auto 10px auto;
+}
+/*
+グリッドレイアウト
+要素の最小サイズは300pxで、画面の幅にあわせて要素の幅が自動で変化する
+repeatで全ての要素に対して適用
+「gap: 26px;」で行と列の隙間を設定
+*/
+#Works .grid {
+  display: grid;
+  gap: 26px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+#Works .grid .item {
+  transition: all  0.3s ease;
+  box-shadow: 0 0 8px 4px #ccc;
+}
+#Works .grid img {
+  vertical-align: top;
+}
+#Works .grid .item-content {
+  padding: 30px;
+}
+#Works .grid .item-cat {
+  font-size: 1.00rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+#Works .grid .item-text {
+  margin-bottom: 20px;
+}
+#Works .grid .item-date {
+  font-size: 0.75rem;
+  text-align: right;
+}
+
+/*-------------------------------------------
+News
+-------------------------------------------*/
+#News dl{
+    display: flex;
+    flex-wrap: wrap;
+    border-top: solid 1px #c8c8c8;
+    margin-bottom: 20px;
+}
+
+#News dt{
+    width: 20%;
+    border-bottom: solid 1px #c8c8c8;
+    padding: 15px;
+}
+
+#News dd{
+    width: 80%;
+    border-bottom: solid 1px #c8c8c8;
+    padding: 15px;
+}
+
+/*-------------------------------------------
+Contact
+-------------------------------------------*/
+#contact {
+  color: #fff;
+  background-color: #121212;
+  padding: 50px 0;
+}
+#contact .sec-title {
+  color: #fff;
+}
+#contact .content {
+  max-width: 1240px;
+  padding: 0 16px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+#contact .contact-info p {
+  margin-bottom: 30px;
+}
+#contact .contact-info,
+#contact .contact-form {
+  width: 45%;
+}
+#contact .contact-form input,
+#contact .contact-form textarea {
+  width: 100%;
+  background-color: #fff;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+#contact .contact-form .button input {
+  width: 200px;
+  color: #fff;
+  background-color: #121212;
+  border: solid 1px #fff;
+  padding: 12px 0;
+  margin-bottom: 0;
+}
+#contact .contact-form .button input:hover {
+  color: #202020;
+  background-color: #fff;
+}
+
+/*-------------------------------------------
+フッター
+-------------------------------------------*/
+#footer {
+  color: #fff;
+  background-color: #121212;
+  text-align: center;
+  padding: 10px;
+  font-size: 0.75rem;
+}
+
+/*-------------------------------------------
+SP
+-------------------------------------------*/
+@media screen and (max-width: 600px) {
+  .sec-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+
+  /*-------------------------------------------
+  ヘッダー
+  -------------------------------------------*/
+  #header {
+    padding: 20px 16px;
+  }
+  .toggle_btn {
+    right: 20px;
+  }
+
+  /*-------------------------------------------
+  Video
+  -------------------------------------------*/
+  /*
+  「height: 100vh;」で画面の高さにあわせる
+  「object-fit: cover;」で中央でトリミング
+  */
+  #bg-video {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+  }
+
+  /*-------------------------------------------
+  About
+  -------------------------------------------*/
+  #About {
+    padding: 80px 0;
+  }
+  #About .slick-area li {
+    padding: 0 20px;
+  }
+
+  /*-------------------------------------------
+  Works
+  -------------------------------------------*/
+  #Works {
+    padding: 80px 16px;
+  }
+  #Works .grid .item-content {
+    padding: 16px;
+  }
+
+  /*-------------------------------------------
+  News
+  -------------------------------------------*/
+  #News dl{
+    flex-direction: column;
+}
+
+#News dt{
+    width: 100%;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+#News dd{
+    width: 100%;
+    padding-top: 0;
+}
+
+  /*-------------------------------------------
+  Contact
+  -------------------------------------------*/
+  #contact {
+    padding: 80px 0;
+  }
+  #contact .content {
+    flex-direction: column;
+  }
+  #contact .contact-info,
+  #contact .contact-form {
+    width: 100%;
+  }
+  #contact .contact-form .button input {
+    width: 100%;
+  }
+}
